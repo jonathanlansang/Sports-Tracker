@@ -4,6 +4,8 @@
  * Created by jonathanlansang on 5/13/16.
  * <p>
  * Created by jonathanlansang on 5/13/16.
+ * <p>
+ * Created by jonathanlansang on 5/13/16.
  */
 /**
  * Created by jonathanlansang on 5/13/16.
@@ -18,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Team {
-    private Player[] player;
+    private Player[] players;
     private String name;
     private String games;
     private String minutesPlayed;
@@ -31,6 +33,7 @@ public class Team {
     private String twoPointers;
     private String twoPointersAttempted;
     private String twoPointPercentage;
+    private String effectiveFieldGoalPercentage;
     private String freeThrows;
     private String freeThrowsAttempted;
     private String freeThrowPercentage;
@@ -48,10 +51,45 @@ public class Team {
 
     public Team(String link) {
         ArrayList<String> stats = getStats(link);
-        //@TODO set values for all the instance vars given
-        //@TODO the getStats method works (start at index0 and go until done)
+        ArrayList<String> playersList = getPlayerLinks(link);
+        name = "team";
+        games = stats.get(0);
+        minutesPlayed = stats.get(1);
+        fieldGoals = stats.get(2);
+        fieldGoalAttempts = stats.get(3);
+        fieldGoalPercentage = stats.get(4);
+        threePointers = stats.get(5);
+        threePointersAttempted = stats.get(6);
+        threePointPercentage = stats.get(7);
+        twoPointers = stats.get(8);
+        twoPointersAttempted = stats.get(9);
+        twoPointPercentage = stats.get(10);
+        effectiveFieldGoalPercentage = stats.get(11);
+        freeThrows = stats.get(12);
+        freeThrowsAttempted = stats.get(13);
+        freeThrowPercentage = stats.get(14);
+        offensiveRebounds = stats.get(15);
+        defensiveRebounds = stats.get(16);
+        totalRebounds = stats.get(17);
+        assists = stats.get(18);
+        steals = stats.get(19);
+        blocks = stats.get(20);
+        turnovers = stats.get(21);
+        personalFouls = stats.get(22);
+        points = stats.get(23);
+
+        Player[] players = new Player[playersList.size()];
+        for (int i = 0; i < players.length; i++) {
+            players[i] = new Player(playersList.get(i));
+        }
     }
 
+    /**
+     * Grabs stats from the team's link on Basketball Reference
+     *
+     * @param link A link to the team's page on Basketball Reference
+     * @return an ArrayList<String> With many stats about the team
+     */
     private ArrayList<String> getStats(String link) {
         ArrayList<String> stats = new ArrayList<String>();
         try {
@@ -59,7 +97,8 @@ public class Team {
             Elements elements = d.select("tr[class$=stat_average no_ranker]").select("td");
             for (Element e : elements) {
                 String s = Jsoup.parse(e.toString()).text();
-                stats.add(s);
+                if (!s.equals("") && !s.equals("Team Totals"))
+                    stats.add(s);
             }
         } catch (IOException i) {
             System.out.println(i.getMessage());
@@ -68,6 +107,11 @@ public class Team {
         return stats;
     }
 
+    /**
+     * Returns an ArrayList<String> of links to player's pages on Basketball Reference
+     * @param teamLink A link to the team's page on Basketball Reference
+     * @return an ArrayList<String> With links to player's pages
+     */
     public ArrayList<String> getPlayerLinks(String teamLink) {
         ArrayList<String> links = new ArrayList<String>();
         try {
@@ -82,5 +126,14 @@ public class Team {
         }
 
         return links;
+    }
+
+    /**
+     * Returns an array of Player objects consisting of players on the team
+     *
+     * @return an array of Player objects consisting of players on the team
+     */
+    public Player[] getPlayers() {
+        return players;
     }
 }

@@ -13,10 +13,23 @@ public class League {
     Player[] players;
     Team[] teams;
 
-    League() {
+
+    public League() {
+        ArrayList<String> teamList = new ArrayList<String>();
+        teams = new Team[teamList.size()];
+
+        for (int i = 0; i < players.length; i++) {
+            teams[i] = new Team(teamList.get(i));
+        }
+
 
     }
 
+    /**
+     * Returns an ArrayList<String> with links to all the Team pages on Basketball Reference
+     *
+     * @return ArrayList<String> with links to all the Team pages on Basketball Reference
+     */
     public ArrayList<String> getTeams() {
         ArrayList<String> links = new ArrayList<String>();
         try {

@@ -37,7 +37,7 @@ public class Player {
     private String personalFouls;
     private String points;
 
-    Player(String link) {
+    public Player(String link) {
         ArrayList<String> stats = getStats(link);
 
         position = stats.get(1);
@@ -68,6 +68,12 @@ public class Player {
         points = stats.get(29);
     }
 
+    /**
+     * Grabs stats from the player's link on Basketball Reference
+     *
+     * @param link A link to the player's page on Basketball Reference
+     * @return an ArrayList<String> With many stats about the player
+     */
     public ArrayList<String> getStats(String link) {
         ArrayList<String> stats = new ArrayList<String>();
         Document d;
