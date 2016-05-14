@@ -52,49 +52,35 @@ public class Team {
         //@TODO the getStats method works (start at index0 and go until done)
     }
 
-    /**
-     * @param link
-     * @return
-     * @TODO Finish this method
-     */
-    public ArrayList<String> getStats(String link) {
+    private ArrayList<String> getStats(String link) {
         ArrayList<String> stats = new ArrayList<String>();
-        Document d;
         try {
-            d = Jsoup.connect(link).get();
-            //@TODO like specifically here, finish this part where you take stats from the html page
-            Elements elements = d.select("table[class$=sortable  stats_table]").select("tbody");
-            for (Element e : elements.select("tr")) {
-                for (Element f : e.select("td")) {
-                    String s = Jsoup.parse(f.toString()).text();
-                    System.out.println(s);
-                    stats.add(s);
-                }
+            Document d = Jsoup.connect(link).get();
+            Elements elements = d.select("tr[class$=stat_average no_ranker]").select("td");
+            for (Element e : elements) {
+                String s = Jsoup.parse(e.toString()).text();
+                stats.add(s);
             }
         } catch (IOException i) {
-            System.out.println(i);
+            System.out.println(i.getMessage());
         }
 
         return stats;
     }
 
-    public String printPlayerName(ArrayList<Player> name) {
-        String playerNames = "";
-        for (int i = 0; i < name.size(); i++) {
-            playerNames += name.//add the getName method in player class
+    public ArrayList<String> getPlayerLinks(String teamLink) {
+        ArrayList<String> links = new ArrayList<String>();
+        try {
+            Document d = Jsoup.connect(teamLink).get();
+            Elements elements = d.select("table[id$=roster]").select("a");
+            for (Element e : elements) {
+                if (e.attr("abs:href").indexOf("http://www.basketball-reference.com/players/") == 0)
+                    links.add(e.attr("abs:href"));
+            }
+        } catch (IOException i) {
+            System.out.println(i.getMessage());
         }
 
+        return links;
     }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getRecord() {
-        return wins + "-" + loss;
-    }
-
-    public String toString() {
-        location + " " + name + "/nRecord: " + getRecord() +
-    }
-}x
+}
