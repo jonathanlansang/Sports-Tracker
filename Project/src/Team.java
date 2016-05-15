@@ -136,4 +136,109 @@ public class Team {
     public Player[] getPlayers() {
         return players;
     }
+
+    public String getGames() {
+        return games;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMinutesPlayed() {
+        return minutesPlayed;
+    }
+
+    public String getFieldGoals() {
+        return fieldGoals;
+    }
+
+    public String getFieldGoalAttempts() {
+        return fieldGoalAttempts;
+    }
+
+    public String getFieldGoalPercentage() {
+        return fieldGoalPercentage;
+    }
+
+    public String getThreePointers() {
+        return threePointers;
+    }
+
+    public String getThreePointersAttempted() {
+        return threePointersAttempted;
+    }
+
+    public String getThreePointPercentage() {
+        return threePointPercentage;
+    }
+
+    public String getTwoPointers() {
+        return twoPointers;
+    }
+
+    public String getTwoPointersAttempted() {
+        return twoPointersAttempted;
+    }
+
+    public String getTwoPointPercentage() {
+        return twoPointPercentage;
+    }
+
+    public String getEffectiveFieldGoalPercentage() {
+        return effectiveFieldGoalPercentage;
+    }
+
+    public String getFreeThrows() {
+        return freeThrows;
+    }
+
+    public String getFreeThrowsAttempted() {
+        return freeThrowsAttempted;
+    }
+
+    public String getFreeThrowPercentage() {
+        return freeThrowPercentage;
+    }
+
+    public String getOffensiveRebounds() {
+        return offensiveRebounds;
+    }
+
+    public String getDefensiveRebounds() {
+        return defensiveRebounds;
+    }
+
+    public String getTotalRebounds() {
+        return totalRebounds;
+    }
+
+    public String getAssists() {
+        return assists;
+    }
+
+    public String getSteals() {
+        return steals;
+    }
+
+    public String getBlocks() {
+        return blocks;
+    }
+
+    public String getTurnovers() {
+        return turnovers;
+    }
+
+    public String getPersonalFouls() {
+        return personalFouls;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public String getPointsPerGame() {
+        return pointsPerGame;
+    }
+
 }
