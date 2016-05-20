@@ -3,35 +3,43 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by alimousa on 5/14/16.
  */
 public class League {
-
-    private Player[] players;
     private Team[] teams;
+    private ArrayList<String> teamFiles;
+    private static final String teamFolder = System.getProperty("user.dir") + System.getProperty("file.separator") +
+            System.getProperty("file.separator") + "Teams" +
+            System.getProperty("file.separator");
 
 
     public League() {
         ArrayList<String> teamList = getTeamLinks();
-        int numPlayers = 0;
+        teamFiles = new ArrayList<String>();
         teams = new Team[teamList.size()];
 
-        for (int i = 0; i < players.length; i++) {
-            teams[i] = new Team(teamList.get(i));
-            numPlayers += teams[i].getPlayers().length;
-        }
-
-        players = new Player[numPlayers];
-
         for (int i = 0; i < teams.length; i++) {
-            for (int j = 0; j < teams[i].getPlayers().length; j++)
-                players[i + j] = players[j];
+            teams[i] = new Team(teamList.get(i));
         }
+        saveData();
+    }
 
+    /**
+     * Loads data locally into League object if parameter passed is "local"
+     *
+     * @param s
+     */
+    public League(String s) {
+        getTeamFiles();
+        if (s.equals("local")) {
+            loadFromData();
+        }
     }
 
     /**
@@ -51,15 +59,55 @@ public class League {
         } catch (IOException i) {
             System.out.println(i);
         }
+        System.out.println("Getting Team Links");
         return links;
     }
 
-    public Player[] getPlayers() {
-        return players;
+    /**
+     * Populates InstanceVar teamFiles with a list of CSV files that hold team stats
+     */
+    private void getTeamFiles() {
+        File f = new File(teamFolder);
+        teamFiles = new ArrayList<String>(Arrays.asList(f.list()));
     }
 
+    /**
+     * Returns array of all Teams
+     *
+     * @return array of all Teams
+     */
     public Team[] getTeams() {
         return teams;
     }
 
+    /**
+     * Records all the data retrieved from the internet that was stored in team objects
+     * Also saves all filenames for the teams to the list "teamFiles"
+     */
+    public void saveData() {
+        CSV csv = new CSV();
+        System.out.println("Saving Team Data!");
+        for (Team t : teams) {
+            teamFiles.add(csv.write(t));
+        }
+    }
+
+    /**
+     * Build team array with team objects using the teamFiles (CSV's)
+     */
+    public void loadFromData() {
+        System.out.println("Loading Team Data!");
+        teams = new Team[teamFiles.size()];
+        CSV csv = new CSV();
+        for (int i = 0; i < teamFiles.size(); i++)
+            teams[i] = new Team(csv.read(teamFolder + teamFiles.get(i)));
+    }
+
+    /**
+     * Print stats for every team
+     */
+    public void printStats() {
+        for (Team t : teams)
+            System.out.println(t);
+    }
 }
