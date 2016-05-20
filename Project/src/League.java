@@ -26,8 +26,9 @@ public class League {
 
         for (int i = 0; i < teams.length; i++) {
             teams[i] = new Team(teamList.get(i));
+            saveData(teams[i]);
         }
-        saveData();
+
     }
 
     /**
@@ -84,12 +85,10 @@ public class League {
      * Records all the data retrieved from the internet that was stored in team objects
      * Also saves all filenames for the teams to the list "teamFiles"
      */
-    public void saveData() {
+    public void saveData(Team t) {
         CSV csv = new CSV();
         System.out.println("Saving Team Data!");
-        for (Team t : teams) {
-            teamFiles.add(csv.write(t));
-        }
+        teamFiles.add(csv.write(t));
     }
 
     /**

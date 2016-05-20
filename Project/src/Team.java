@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 public class Team {
     private Player[] players;
-    private String[] allStats;
     private String teamLink;
     private String name;
     private String games;
