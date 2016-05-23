@@ -12,6 +12,8 @@
  * Created by jonathanlansang on 5/13/16.
  * <p>
  * Created by jonathanlansang on 5/13/16.
+ * <p>
+ * Created by jonathanlansang on 5/13/16.
  */
 /**
  * Created by jonathanlansang on 5/13/16.
@@ -30,62 +32,13 @@ public class Team implements Comparable<Team> {
     private String[][] statsTable;
     private String teamLink;
     private String name;
-    private String games;
-    private String minutesPlayed;
-    private String fieldGoals;
-    private String fieldGoalAttempts;
-    private String fieldGoalPercentage;
-    private String threePointers;
-    private String threePointersAttempted;
-    private String threePointPercentage;
-    private String twoPointers;
-    private String twoPointersAttempted;
-    private String twoPointPercentage;
-    private String effectiveFieldGoalPercentage;
-    private String freeThrows;
-    private String freeThrowsAttempted;
-    private String freeThrowPercentage;
-    private String offensiveRebounds;
-    private String defensiveRebounds;
-    private String totalRebounds;
-    private String assists;
-    private String steals;
-    private String blocks;
-    private String turnovers;
-    private String personalFouls;
-    private String points;
 
 
     public Team(String link) {
         teamLink = link;
         ArrayList<String> stats = getStats();
         //ArrayList<String> playersList = getPlayerLinks(link);
-
         name = stats.get(stats.size() - 1);
-        games = stats.get(0);
-        minutesPlayed = stats.get(1);
-        fieldGoals = stats.get(2);
-        fieldGoalAttempts = stats.get(3);
-        fieldGoalPercentage = stats.get(4);
-        threePointers = stats.get(5);
-        threePointersAttempted = stats.get(6);
-        threePointPercentage = stats.get(7);
-        twoPointers = stats.get(8);
-        twoPointersAttempted = stats.get(9);
-        twoPointPercentage = stats.get(10);
-        effectiveFieldGoalPercentage = stats.get(11);
-        freeThrows = stats.get(12);
-        freeThrowsAttempted = stats.get(13);
-        freeThrowPercentage = stats.get(14);
-        offensiveRebounds = stats.get(15);
-        defensiveRebounds = stats.get(16);
-        totalRebounds = stats.get(17);
-        assists = stats.get(18);
-        steals = stats.get(19);
-        blocks = stats.get(20);
-        turnovers = stats.get(21);
-        personalFouls = stats.get(22);
-        points = stats.get(23);
 
         ArrayList<String> playersList = getPlayerLinks(link);
 
@@ -99,32 +52,7 @@ public class Team implements Comparable<Team> {
 
     public Team(ArrayList<String[]> statistics) {
         String[] stats = statistics.get(1);
-
         name = stats[0];
-        games = stats[5];
-        minutesPlayed = stats[7];
-        fieldGoals = stats[8];
-        fieldGoalAttempts = stats[9];
-        fieldGoalPercentage = stats[10];
-        threePointers = stats[11];
-        threePointersAttempted = stats[12];
-        threePointPercentage = stats[13];
-        twoPointers = stats[14];
-        twoPointersAttempted = stats[15];
-        twoPointPercentage = stats[16];
-        effectiveFieldGoalPercentage = stats[17];
-        freeThrows = stats[18];
-        freeThrowsAttempted = stats[19];
-        freeThrowPercentage = stats[20];
-        offensiveRebounds = stats[21];
-        defensiveRebounds = stats[22];
-        totalRebounds = stats[23];
-        assists = stats[24];
-        steals = stats[25];
-        blocks = stats[26];
-        turnovers = stats[27];
-        personalFouls = stats[28];
-        points = stats[29];
 
         players = new Player[statistics.size() - 2];
         for (int i = 2; i < statistics.size(); i++) {
@@ -229,104 +157,8 @@ public class Team implements Comparable<Team> {
         return players;
     }
 
-    public String getGames() {
-        return games;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public String getMinutesPlayed() {
-        return minutesPlayed;
-    }
-
-    public String getFieldGoals() {
-        return fieldGoals;
-    }
-
-    public String getFieldGoalAttempts() {
-        return fieldGoalAttempts;
-    }
-
-    public String getFieldGoalPercentage() {
-        return fieldGoalPercentage;
-    }
-
-    public String getThreePointers() {
-        return threePointers;
-    }
-
-    public String getThreePointersAttempted() {
-        return threePointersAttempted;
-    }
-
-    public String getThreePointPercentage() {
-        return threePointPercentage;
-    }
-
-    public String getTwoPointers() {
-        return twoPointers;
-    }
-
-    public String getTwoPointersAttempted() {
-        return twoPointersAttempted;
-    }
-
-    public String getTwoPointPercentage() {
-        return twoPointPercentage;
-    }
-
-    public String getEffectiveFieldGoalPercentage() {
-        return effectiveFieldGoalPercentage;
-    }
-
-    public String getFreeThrows() {
-        return freeThrows;
-    }
-
-    public String getFreeThrowsAttempted() {
-        return freeThrowsAttempted;
-    }
-
-    public String getFreeThrowPercentage() {
-        return freeThrowPercentage;
-    }
-
-    public String getOffensiveRebounds() {
-        return offensiveRebounds;
-    }
-
-    public String getDefensiveRebounds() {
-        return defensiveRebounds;
-    }
-
-    public String getTotalRebounds() {
-        return totalRebounds;
-    }
-
-    public String getAssists() {
-        return assists;
-    }
-
-    public String getSteals() {
-        return steals;
-    }
-
-    public String getBlocks() {
-        return blocks;
-    }
-
-    public String getTurnovers() {
-        return turnovers;
-    }
-
-    public String getPersonalFouls() {
-        return personalFouls;
-    }
-
-    public String getPoints() {
-        return points;
     }
 
     public String[][] getStatsTable() {

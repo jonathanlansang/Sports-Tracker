@@ -17,10 +17,16 @@ public class GUI {
     GUI(League nba) {
         this.nba = nba;
         frame = new JFrame("Stats");
-        teams = nba.getTeamNames();
+        teams = new String[nba.getTeamNames().length+1];
+
+        teams[0]= " ";
+        for(int i = 1; i <= nba.getTeams().length;i++)
+            teams[i] = nba.getTeamNames()[i-1];
+
         comboBox = new JComboBox(teams);
         comboBox.addItemListener(new ItemChangeListener(this));
         //DO STUFF
+
         Team t = nba.getTeams()[0]; //Team t should be the selected item of the combobox
 
         table = new JTable(t.getStatsTable(), CSV.getHeader().split(","));

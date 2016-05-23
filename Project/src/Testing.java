@@ -6,8 +6,6 @@ import javax.swing.*;
 public class Testing extends JFrame {
 
     public static void main(String[] args) {
-        League nba = new League("local");
-
-        GUI gui = new GUI(nba);
+        League nba = new League();
     }
 }

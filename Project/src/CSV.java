@@ -20,6 +20,7 @@ public class CSV {
     /**
      * Writes all the team's stats and the players on the
      * team's stats to the CSV file with name "TeamName.csv"
+     *
      * @param team Team Object to be recorded
      */
     public String write(Team team) {

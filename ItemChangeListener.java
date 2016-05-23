@@ -21,9 +21,11 @@ public class ItemChangeListener implements ItemListener {
 
             JFrame newFrame = new JFrame(t.getName());
             JScrollPane scrollPane = new JScrollPane(gui.getTable());
-            gui.getTable().setPreferredScrollableViewportSize(new Dimension(500, 70));
+            gui.getTable().setPreferredScrollableViewportSize(gui.getTable().getPreferredScrollableViewportSize());
+            gui.getTable().setFillsViewportHeight(true);
 
             newFrame.add(scrollPane);
+
 
             newFrame.pack();
             newFrame.setVisible(true);
