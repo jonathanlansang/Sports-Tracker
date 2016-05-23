@@ -12,7 +12,6 @@ public class CSV {
             "twoPointers,twoPointersAttempted,twoPointPercentage,effectiveFieldGoalPercentage,freeThrows," +
             "freeThrowsAttempted,freeThrowPercentage,offensiveRebounds,defensiveRebounds,totalRebounds," +
             "assists,steals,blocks,turnovers,personalFouls,points";
-    private static final int NUMTEAMS = 30;
 
     CSV() {
 
@@ -21,8 +20,7 @@ public class CSV {
     /**
      * Writes all the team's stats and the players on the
      * team's stats to the CSV file with name "TeamName.csv"
-     *
-     * @param team Team Object to be recordeds
+     * @param team Team Object to be recorded
      */
     public String write(Team team) {
         String rtn = System.getProperty("file.separator") + System.getProperty("user.dir") + System.getProperty("file.separator")

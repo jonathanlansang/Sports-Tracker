@@ -254,6 +254,10 @@ public class Player implements Comparable<Player> {
         return points;
     }
 
+    public String[] getAllStats() {
+        return allStats;
+    }
+
     /**
      * Compares players a and b lexicographically
      *

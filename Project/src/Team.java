@@ -25,8 +25,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Team {
+public class Team implements Comparable<Team> {
     private Player[] players;
+    private String[][] statsTable;
     private String teamLink;
     private String name;
     private String games;
@@ -92,6 +93,8 @@ public class Team {
         for (int i = 0; i < players.length; i++) {
             players[i] = new Player(playersList.get(i));
         }
+
+        statsTable = makeStatsTable();
     }
 
     public Team(ArrayList<String[]> statistics) {
@@ -129,6 +132,8 @@ public class Team {
         }
         if (players.length != 0)
             doSort();
+
+        statsTable = makeStatsTable();
     }
 
     /**
@@ -202,6 +207,16 @@ public class Team {
             quickSort(list, first, h);
         if (g < last)
             quickSort(list, g, last);
+    }
+
+    private String[][] makeStatsTable() {
+        String[] header = CSV.getHeader().split(",");
+        String[][] table = new String[players.length][header.length];
+
+        for (int i = 0; i < players.length; i++) {
+            table[i] = players[i].getAllStats();
+        }
+        return table;
     }
 
 
@@ -312,6 +327,14 @@ public class Team {
 
     public String getPoints() {
         return points;
+    }
+
+    public String[][] getStatsTable() {
+        return statsTable;
+    }
+
+    public int compareTo(Team b) {
+        return this.getName().compareTo(b.getName());
     }
 
     public String toString() {
